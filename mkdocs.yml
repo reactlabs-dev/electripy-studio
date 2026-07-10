@@ -1,5 +1,8 @@
 site_name: ElectriPy AI
-site_url: https://electripy.ai/docs/
+# Deployed via GitHub Actions (.github/workflows/docs.yml) to the gh-pages
+# branch → served at the URL below. Custom domain (electripy.ai/docs) can
+# be added later via a CNAME record pointing docs.electripy.ai → inference-stack-llc.github.io
+site_url: https://inference-stack-llc.github.io/electripy-ai/
 site_description: >-
   The Open Source AI Application Runtime — reliability, observability, governance,
   evaluation, MCP integration, skills packaging, realtime orchestration, and
