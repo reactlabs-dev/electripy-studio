@@ -53,7 +53,7 @@ def doctor() -> None:
 
     # Check ElectriPy version
     try:
-        electripy_version = get_version("electripy")
+        electripy_version = get_version("electripy-ai")
         table.add_row(
             "ElectriPy Version",
             "[green]✓ OK[/green]",
@@ -129,7 +129,7 @@ def playground() -> None:
 def version() -> None:
     """Show ElectriPy version."""
     try:
-        ver = get_version("electripy")
+        ver = get_version("electripy-ai")
         console.print(f"ElectriPy version: [cyan]{ver}[/cyan]")
     except Exception:
         console.print("[red]Could not determine version[/red]")
