@@ -60,8 +60,8 @@ class FakeProvider(SyncLlmPort):
         return LlmResponse(
             text=f"Acknowledged: {user_text[:80]}. No sensitive data surfaced.",
             model=request.model,
-            
-            
+
+
             usage_total_tokens=len(user_text.split()) + 10,
         )
 
