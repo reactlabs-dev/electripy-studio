@@ -18,6 +18,7 @@ Usage:
     pip install electripy-ai
     python quickstart.py
 """
+
 from __future__ import annotations
 
 import time
@@ -60,8 +61,6 @@ class FakeProvider(SyncLlmPort):
         return LlmResponse(
             text=f"Acknowledged: {user_text[:80]}. No sensitive data surfaced.",
             model=request.model,
-
-
             usage_total_tokens=len(user_text.split()) + 10,
         )
 
@@ -96,7 +95,9 @@ def main() -> None:
             ),
         ]
     )
-    console.print("  [dim]2 rules active · PREFLIGHT email redaction · POSTFLIGHT secret blocking[/dim]")
+    console.print(
+        "  [dim]2 rules active · PREFLIGHT email redaction · POSTFLIGHT secret blocking[/dim]"
+    )
 
     # L03 Reliability
     console.print("[bold]L03 Reliability[/bold] · Circuit Breaker")
@@ -119,12 +120,16 @@ def main() -> None:
             response_hook=response_hook,
         ),
     )
-    console.print("  [dim]FakeProvider · swap for OpenAiSyncAdapter(api_key=...) for real calls[/dim]")
+    console.print(
+        "  [dim]FakeProvider · swap for OpenAiSyncAdapter(api_key=...) for real calls[/dim]"
+    )
 
     # Cost Ledger
     console.print("[bold]Cost Ledger[/bold]    · Token Accumulation")
     ledger = CostLedger(cost_per_1k_tokens=0.00015)
-    console.print("  [dim]$0.00015/1K tokens · thread-safe · sliceable by model / tenant / feature[/dim]")
+    console.print(
+        "  [dim]$0.00015/1K tokens · thread-safe · sliceable by model / tenant / feature[/dim]"
+    )
 
     console.print()
     console.print(Rule("Executing"))
@@ -195,24 +200,26 @@ def main() -> None:
     console.print()
     console.print(
         Panel(
-            "\n".join([
-                "[bold green]Five production layers. Active. Zero boilerplate.[/bold green]",
-                "",
-                "Most teams build this from scratch — policy hooks, circuit breakers,",
-                "span propagation, cost tracking — one module at a time, per project.",
-                "ElectriPy AI ships it composable, tested, production-ready from day one.",
-                "",
-                "[bold]Use a real model:[/bold]",
-                "  from electripy.ai.llm_gateway import OpenAiSyncAdapter",
-                "  port = OpenAiSyncAdapter(api_key=os.environ['OPENAI_API_KEY'])",
-                "  # or: AnthropicSyncAdapter / OllamaSyncAdapter",
-                "",
-                "[bold]Explore more:[/bold]",
-                "  electripy playground            ← interactive terminal UI (no API key)",
-                "  electripy demo policy-collab    ← offline policy + multi-agent demo",
-                "  recipes/02_llm_gateway/         ← real provider patterns",
-                "  recipes/03_policy_collaboration/ ← end-to-end policy + agents",
-            ]),
+            "\n".join(
+                [
+                    "[bold green]Five production layers. Active. Zero boilerplate.[/bold green]",
+                    "",
+                    "Most teams build this from scratch — policy hooks, circuit breakers,",
+                    "span propagation, cost tracking — one module at a time, per project.",
+                    "ElectriPy AI ships it composable, tested, production-ready from day one.",
+                    "",
+                    "[bold]Use a real model:[/bold]",
+                    "  from electripy.ai.llm_gateway import OpenAiSyncAdapter",
+                    "  port = OpenAiSyncAdapter(api_key=os.environ['OPENAI_API_KEY'])",
+                    "  # or: AnthropicSyncAdapter / OllamaSyncAdapter",
+                    "",
+                    "[bold]Explore more:[/bold]",
+                    "  electripy playground            ← interactive terminal UI (no API key)",
+                    "  electripy demo policy-collab    ← offline policy + multi-agent demo",
+                    "  recipes/02_llm_gateway/         ← real provider patterns",
+                    "  recipes/03_policy_collaboration/ ← end-to-end policy + agents",
+                ]
+            ),
             title="[bold purple]ElectriPy AI[/bold purple]",
             border_style="purple",
         )
