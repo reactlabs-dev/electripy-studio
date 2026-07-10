@@ -1,0 +1,40 @@
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+  # Allow manual re-deploy from the Actions tab
+  workflow_dispatch:
+
+# Allow gh-deploy to push to the gh-pages branch
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Build & deploy MkDocs site
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history lets mkdocs-material show "last updated" dates
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs and theme
+        run: |
+          pip install --upgrade pip
+          pip install \
+            mkdocs-material \
+            mkdocs-minify-plugin \
+            pymdown-extensions
+
+      - name: Build & push to gh-pages branch
+        run: mkdocs gh-deploy --force --clean --verbose
